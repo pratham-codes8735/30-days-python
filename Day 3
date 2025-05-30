@@ -1,0 +1,70 @@
+inventory ={
+    
+    "Pen":(10,100),
+    "Notebook":(50,1500),
+    "Marker":(20,200)
+    
+}
+def add_product(name,price,quantity):
+    if name in inventory :
+        old_price,old_quantity=inventory [name]
+        new_quantity= old_quantity+quantity 
+        inventory [name]=(price, new_quantity)
+    else:
+        inventory [name]=(price,quantity)
+            
+add_product("Pen",10,200)        
+add_product("Notebook",50,500) 
+add_product("Drawing_colours",40,250)
+   
+        
+def sell_product(name, quantity):
+    
+    if name in inventory:
+        price, available_quantity = inventory[name]
+        if available_quantity>=quantity :
+            new_quantity=available_quantity-quantity
+            inventory [name]=(price,new_quantity)
+          #  print(f"\n✅ {quantity} {name} are available")
+            print(f"📦  number of {name}  is {new_quantity}")
+            if new_quantity == 0:
+                print(f"⚠️ {name} is out of stock now.")
+    
+    else:
+        print(" Product not in inventory.")
+sell_product("Pen", 50)         # ✅
+sell_product("Notebook", 5000)  # ❌
+sell_product("Marker", 5)       # ✅
+sell_product("Drawing_colours", 5)#✅
+
+def display_inventory():
+    for name in inventory:
+        price, quantity = inventory[name]
+        print(f"Product: {name} \n| Price: {price} | Quantity: {quantity}")
+
+def buy_from_inventory():
+    print("Available products:")
+    display_inventory()  
+    
+    name = input("Enter product name to buy: ")
+    if name not in inventory:
+        print("Sorry, product not available.")
+        return
+    
+    quantity = input("Enter quantity to buy: ")
+    print("Thank you for shopping...")
+    if not quantity.isdigit():
+        print("Please enter a valid number.")
+        return
+    
+    quantity = int(quantity)
+    sell_product(name, quantity)  
+
+buy_from_inventory()             
+        
+
+            
+             
+        
+    
+    
