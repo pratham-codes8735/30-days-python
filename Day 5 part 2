@@ -1,0 +1,11 @@
+def calculate (num):
+    add_numbers=0
+    for i in num:
+        add_numbers=(add_numbers+i)
+        avg=(add_numbers)/len(sample)
+        
+    return avg
+        
+sample=[10,5,15]
+average =calculate(sample)
+print("The average of numbers is = ",average )
