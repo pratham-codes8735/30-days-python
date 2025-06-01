@@ -1,0 +1,9 @@
+#named arguments
+
+def calculate(a,b):
+    difference= a-b
+
+    return difference
+
+subtraction=calculate(a=5,b=2)
+print ("The difference of numbers is", subtraction)
