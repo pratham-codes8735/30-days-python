@@ -1,0 +1,11 @@
+def calculate(num):
+    total=0
+    for i in num:
+        total=total+i
+        
+    return total
+    
+    
+list=[3,2,7]
+addition=calculate(list)
+print ("The sum of all numbers is = ",addition )
