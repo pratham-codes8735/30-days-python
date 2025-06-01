@@ -1,0 +1,12 @@
+#default arguments
+
+def calculate(a, b = 0):
+    difference =a-b
+
+    return difference
+
+
+
+subtraction=calculate (a = 5)
+
+print ("The difference of numbers is", subtraction)
