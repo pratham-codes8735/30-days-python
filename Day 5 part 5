@@ -1,0 +1,10 @@
+#Global vs local variable 
+difference =0
+def calculate(a,b):
+    difference =a-b
+    print("inside function", difference)
+    return difference 
+    
+subtraction=calculate(a=5,b=2)
+
+print ("outside function ",difference)
