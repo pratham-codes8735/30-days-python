@@ -1,0 +1,7 @@
+import string 
+import random
+
+character=string.ascii_letters+string.digits+string.punctuation
+password = ''.join(random.choice(character) for i in range (8))
+
+print("Random password for 8 digits is :- ",password)
