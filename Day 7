@@ -1,0 +1,21 @@
+import string 
+with open("sample.txt", "w") as f:
+    f.write("I am Pratham Singh  and I am practicing file handling in python as a part of 30 days python learning initiative by Indian data club ")
+with open("sample.txt", "r") as f:
+     text=f.read()
+
+
+text = text.lower() 
+for p in string.punctuation:
+    text = text.replace(p," ")
+words = text.split()
+
+word_freq = {}
+
+for word in words:
+    if word in word_freq:
+        word_freq[word] += 1
+    else:
+        word_freq[word] = 1
+for word, freq in word_freq.items():
+    print(f"{word}: {freq}")
