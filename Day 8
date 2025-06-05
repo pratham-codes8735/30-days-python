@@ -1,0 +1,33 @@
+class cars:
+    name="n"
+    brand="b"
+    engine="e"
+    costs="c"
+        
+    def intro_(self):
+        print(f"{self.name} is a car of {self.brand} brand ")
+            
+    def more_info(self):
+        print(f"{self.name} has an {self.engine} engine")  
+        print(f"{self.name} costs {self.price}")
+
+Thar=cars()   
+Thar.name="Thar"   
+Thar.brand="Mahindra"  
+Thar.engine="mStallion 150 TGDi"
+Thar.price="twenty lakhs"
+
+Avinya=cars()   
+Avinya.name="Avinya"   
+Avinya.brand="Tata"  
+Avinya.engine="Gen 3 skateboard born-electric"
+Avinya.price="forty lakhs"
+
+Thar.intro_()
+Thar.more_info()
+print("\n")
+Avinya.intro_()
+Avinya.more_info()
+
+
+
