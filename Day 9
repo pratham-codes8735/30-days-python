@@ -1,0 +1,23 @@
+class cars:
+    name="n"
+    brand="b"
+    engine="e"
+    costs="c"
+        
+    def intro_(self):
+        print(f"{self.name} is a car of {self.brand} brand ")
+        print(f"{self.name} has an {self.engine} engine")  
+        print(f"{self.name} costs {self.costs}")
+
+class electric_cars(cars):
+    def battery (self):
+        print(f"The battery of EV is 75%")
+
+
+Avinya = electric_cars()
+Avinya.name= "Avinya"
+Avinya.brand="Tata"
+Avinya.engine="xyz"
+Avinya.costs="40 lakhs"
+Avinya.intro_()
+Avinya.battery()
