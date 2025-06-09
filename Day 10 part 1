@@ -1,0 +1,10 @@
+#exception handling
+#File not found error
+try:
+f = open("xyz.txt", "r")
+output = f.read()
+print(output)
+f.close()
+except FileNotFoundError:
+print("This file does not exist")
+
