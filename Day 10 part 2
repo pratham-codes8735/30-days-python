@@ -1,0 +1,7 @@
+try:
+    f = open("xyz.txt", "r")
+    output = f.read()
+    print(output)
+    f.close()
+except FileNotFoundError:
+    print("Oops! The file you're trying to read doesn't exist.")
