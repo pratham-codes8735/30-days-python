@@ -1,0 +1,10 @@
+try:
+    x = int(input("Enter a number: "))
+    y = 10 / x
+    print("Result:", y)
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+except ValueError:
+    print("Invalid input! Please enter a number.")
+finally:
+    print("This block always runs.")
