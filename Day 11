@@ -1,0 +1,19 @@
+
+from datetime import datetime
+
+#this will take string input
+first_date=input ("Enter the first date:- ")
+second_date=input ("Enter the second date:- ")
+
+#convert string to datetime format
+
+first_date=datetime.strptime(first_date,"%Y-%m-%d")
+second_date=datetime.strptime(second_date,"%Y-%m-%d")
+
+
+days_between_dates=abs((first_date-second_date))
+
+print (f"days between {first_date} and {second_date} are {days_between_dates}")
+
+
+    
