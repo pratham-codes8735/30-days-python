@@ -1,0 +1,42 @@
+class stack:
+    def __init__(self):
+        self.stack=[]
+    def push(self,item):
+        self.stack.append(item)
+        print(f"enter the item to be stored in stack :{item}\n")    
+    def empty (self):
+        return len(self.stack)==0
+   
+    def pop(self):
+        if self.empty() :
+            print("stack is empty!!") 
+        else:
+            popped= self.stack.pop()
+            print(f"popped stack is : {popped} ")
+    def peek(self):
+        if not self.empty() :
+            return self.stack[-1]
+        else:
+            print("stack is empty!!") 
+    def display(self):
+        if self.empty():
+            print("stack is empty")
+        else:
+            print("stack top to bottom is :- ")
+                
+        
+        for item in reversed(self.stack):
+            print(item )  
+    
+          
+
+my_stack=stack()
+my_stack.push(1)
+my_stack.push (7)
+my_stack.push (45)
+my_stack.push (18)
+my_stack.pop()
+print("Top element is :- " ,my_stack.peek())
+
+my_stack.display()
+                       
