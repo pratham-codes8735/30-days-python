@@ -1,0 +1,15 @@
+def lazy_gen():
+    print("Generator created")
+    yield 1
+    print("Yielded 1")
+    yield 2
+    print("Yielded 2")
+    yield 3
+    print("Yielded 3")
+
+gen = lazy_gen()
+print("Nothing has run yet!")
+
+print(next(gen))   
+print(next(gen))
+print(next(gen))
