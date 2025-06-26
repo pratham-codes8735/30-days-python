@@ -1,0 +1,15 @@
+
+class NamingRuleEnforcer(type):
+    def __new__(cls, name, bases, dct):
+        if not name[0].isupper():
+            raise ValueError(f"Class name '{name}' must start with an uppercase letter!")
+        return super().__new__(cls, name, bases, dct)
+        
+ 
+#will run successfully 
+class Employee(metaclass=NamingRuleEnforcer):
+    pass  
+
+#will show error
+class developer(metaclass=NamingRuleEnforcer):
+    pass        
