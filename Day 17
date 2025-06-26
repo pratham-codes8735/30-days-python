@@ -1,0 +1,23 @@
+class Context_manager:
+    def __init__(self, filename ,mode):
+        self.filename=filename
+        self.mode=mode
+        
+    def __enter__(self) :
+        self.file=open(self.filename,self.mode)
+        print(f"{self.filename} is opening....") 
+        return self.file
+    
+    def __exit__(self,exc_type,exc_value,exc_tb) :
+        self.file.close()
+        if exc_type:
+            print(f"Exception occurred is {exc_type.__name__} ----> {exc_value}")
+        
+        print(f"{self.filename} is closing....")
+        return True  
+        
+
+
+
+with Context_manager ('file.txt' ,'w') as f:
+    f.write("Hello Pratham , how are you??")
