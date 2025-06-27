@@ -1,0 +1,27 @@
+import threading
+import requests
+
+def download_file(url, filename):
+    print(f"Downloading {filename}...")
+    response = requests.get(url)
+    with open(filename, 'wb') as f:
+        f.write(response.content)
+    print(f"{filename} downloaded successfully.")
+
+urls=[
+("https://file-examples.com/storage/fe803e9596685d587a3e84a/2017/10/file_example_PNG_500kB.png "," file1.png"),
+(" https://file-examples.com/storage/fe803e9596685d587a3e84a/2017/10/file_example_PNG_1MB.png"," file2.png"),
+(" https://file-examples.com/storage/fe803e9596685d587a3e84a/2017/10/file_example_PNG_2100kB.png"," file3.png")
+ ]
+
+threads = []
+
+for url, filename in urls:
+  t= threading.Thread(target=download_file,args=(url, filename))
+  threads.append(t)
+
+for t in threads:
+    t.start()
+
+for t in threads:
+    t.join()
