@@ -1,0 +1,10 @@
+import requests
+
+response = requests.get('https://youtube.com')
+print(response.status_code)
+print(response.text)
+
+words = response.text.split()
+first_100_words = " ".join(words[:100])
+print("First 100 words of HTML:\n")
+print(first_100_words)
