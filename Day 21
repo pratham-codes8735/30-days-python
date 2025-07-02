@@ -1,0 +1,14 @@
+from bs4 import BeautifulSoup
+import requests
+
+html_text = requests.get('https://www.thehindu.com').text
+
+soup = BeautifulSoup(html_text, 'lxml')
+
+tags1 = soup.find('h5')
+tags2 = soup.find('h4')
+tags3 = soup.find('h3')
+
+print("MAIN TAG :-", tags1)
+print("second TAG :-", tags2)
+print("third TAG :-", tags3)
