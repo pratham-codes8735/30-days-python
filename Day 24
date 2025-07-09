@@ -1,0 +1,23 @@
+from dataclasses import dataclass
+
+@dataclass
+
+class Book:
+    title:str
+    author:str
+    ISBN:int
+    publication_year:int
+
+    def display_details(self):
+        print(f"Title: {self.title}")
+        print(f"Author: {self.author}")
+        print(f"ISBN: {self.ISBN}")
+        print(f"Publication Year: {self.publication_year}")
+
+    
+
+Info= Book("The Alchemist","Paulo Coelho",9788408052944,1988 ) 
+
+print(Info)
+
+Info.display_details()
