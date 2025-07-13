@@ -1,0 +1,31 @@
+'''
+DAY 25
+Build a Pydantic model for a user profile with fields for name, email, and age,
+ including validation for email format and age range (18–100)
+'''
+from pydantic import BaseModel,field_validator 
+import re
+   
+class Person(BaseModel):
+
+    Name:str
+    Email: str
+    age: int   
+
+    @field_validator('age')
+    @classmethod
+    def age_must_be_valid(cls, value):
+        if not (18 <= value <= 50):
+            raise ValueError("Age must be between 18 and 100")
+        return value
+    
+    @field_validator('Email')
+    @classmethod
+    def email_validator(cls,value_email):
+        pattern = r'^[\w\.]+@[\w\.]+\.\w{2,}$'
+        if not re.match(pattern,value_email):
+            raise ValueError("INVALID EMAIL")
+        return value_email
+  
+person1=Person(Name="Pratham",Email="ps801p@gmail.com", age=20)        
+print(person1)
