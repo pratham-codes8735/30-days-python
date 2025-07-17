@@ -1,0 +1,51 @@
+from fastapi import FastAPI
+from pydantic import BaseModel 
+app=FastAPI()
+
+class Book(BaseModel):
+    title: str
+    author: str
+    year: int
+
+books = [
+    {"id": 1, "title": "The Alchemist", "author": "Paulo Coelho", "year": 1988},
+    {"id": 2, "title": "1984", "author": "George Orwell", "year": 1949},
+]
+
+@app.get("/books")
+def get_books():
+    return books
+
+@app.get("/books/{book_id}")
+def get_book(book_id: int):
+    for book in books:
+        if book["id"] == book_id:
+            return book
+    return {"error": "Book not found"}
+
+
+@app.post("/books")
+def add_book(book: Book):
+    new_id = len(books) + 1
+    new_book = {"id": new_id, **book.dict()}
+    books.append(new_book)
+    return {"message": "Book added successfully", "book": new_book}
+
+@app.put("/books/{book_id}")
+def update_book(book_id: int, updated_book: Book):
+    for book in books:
+        if book["id"] == book_id:
+            book["title"] = updated_book.title
+            book["author"] = updated_book.author
+            book["year"] = updated_book.year
+            return {"message": "Book updated", "book": book}
+    return {"error": "Book not found"}
+
+
+@app.delete("/books/{book_id}")
+def delete_book(book_id: int):
+    for book in books:
+        if book["id"] == book_id:
+            books.remove(book)
+            return {"message": "Book deleted"}
+    return {"error": "Book not found"}
