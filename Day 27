@@ -1,0 +1,146 @@
+from fastapi import FastAPI, Depends, HTTPException
+
+from pydantic import BaseModel
+
+from sqlalchemy import create_engine, Column, Integer, String
+
+from sqlalchemy.ext.declarative import declarative_base
+
+from sqlalchemy.orm import sessionmaker, Session
+
+FastAPI App
+
+app = FastAPI()
+
+Database setup
+
+DATABASE_URL = "sqlite:///./test.db"
+
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+Base = declarative_base()
+
+SQLAlchemy Book Model
+
+class BookDB(Base):
+
+__tablename__ = "books"
+
+id = Column(Integer, primary_key=True, index=True)
+
+title = Column(String)
+
+author = Column(String)
+
+year = Column(Integer)
+
+Pydantic Model
+
+class Book(BaseModel):
+
+title: str
+
+author: str
+
+year: int
+
+Create DB Tables
+
+Base.metadata.create_all(bind=engine)
+
+Dependency
+
+def get_db():
+
+db = SessionLocal()
+
+try:
+
+    yield db
+
+finally:
+
+    db.close()
+
+Get All Books
+
+@app.get("/books/")
+
+def get_books(db: Session = Depends(get_db)):
+
+return db.query(BookDB).all()
+
+Get Single Book
+
+@app.get("/books/{book_id}", response_model=Book)
+
+def get_book(book_id: int, db: Session = Depends(get_db)):
+
+book = db.query(BookDB).filter(BookDB.id == book_id).first()
+
+if not book:
+
+    raise HTTPException(status_code=404, detail="Book not found")
+
+return book
+
+Add New Book
+
+@app.post("/books/", response_model=Book)
+
+def add_book(book: Book, db: Session = Depends(get_db)):
+
+db_book = BookDB(**book.dict())
+
+db.add(db_book)
+
+db.commit()
+
+db.refresh(db_book)
+
+return db_book
+
+Update Book
+
+@app.put("/books/{book_id}")
+
+def update_book(book_id: int, updated_book: Book, db: Session = Depends(get_db)):
+
+book = db.query(BookDB).filter(BookDB.id == book_id).first()
+
+if not book:
+
+    raise HTTPException(status_code=404, detail="Book not found")
+
+book.title = updated_book.title
+
+book.author = updated_book.author
+
+book.year = updated_book.year
+
+db.commit()
+
+db.refresh(book)
+
+return {"message": "Book updated", "book": book}
+
+Delete Book
+
+@app.delete("/books/{book_id}")
+
+def delete_book(book_id: int, db: Session = Depends(get_db)):
+
+book = db.query(BookDB).filter(BookDB.id == book_id).first()
+
+if not book:
+
+    raise HTTPException(status_code=404, detail="Book not found")
+
+db.delete(book)
+
+db.commit()
+
+return {"message": "Book deleted successfully"}
+
